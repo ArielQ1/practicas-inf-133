@@ -5,6 +5,19 @@ from pysimplesoap.server import SoapDispatcher, SOAPHandler
 def sumaNumeros(num1, num2):
     return "La suma de los numeros {} y {} es : {} ".format(num1,num2,int(num1)+int(num2))
 
+def cadenaPalindromo(cadena):
+    cad = cadena.lower().replace(" ", "")
+    return cad == cadena [::-1].lower().replace(" ","")
+
+dispatcher = SoapDispatcher(
+    "verifica-cadena-palindromo",
+    location="http://localhost:8000/",
+    action="http://localhost:8000/",
+    namespace="http://localhost:8000/",
+    trace = True,
+    ns = True,
+)
+
 dispatcher = SoapDispatcher(
     "suma-de-numeros",
     location="http://localhost:8000/",
@@ -12,6 +25,13 @@ dispatcher = SoapDispatcher(
     namespace="http://localhost:8000/",
     trace = True,
     ns = True,
+)
+
+dispatcher.register_function(
+    "CadenaPalindromo",
+    cadenaPalindromo,
+    returns={"CadenaPalindromo": bool},
+    args={"cadena": str}
 )
 
 dispatcher.register_function(
