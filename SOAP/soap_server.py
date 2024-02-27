@@ -3,7 +3,7 @@ from pysimplesoap.server import SoapDispatcher, SOAPHandler
 
 
 def sumaNumeros(num1, num2):
-    return "La suma de los numeros es : {}".format(num1+num2)
+    return "La suma de los numeros {} y {} es : {} ".format(num1,num2,int(num1)+int(num2))
 
 dispatcher = SoapDispatcher(
     "suma-de-numeros",
@@ -17,7 +17,7 @@ dispatcher = SoapDispatcher(
 dispatcher.register_function(
     "SumaDosNumeros",
     sumaNumeros,
-    returns={"resultado": int},
+    returns={"SumaDosNumeros": str},
     args={"num1": int, "num2": int}
 )
 
