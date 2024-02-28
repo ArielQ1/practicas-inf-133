@@ -3,5 +3,5 @@
 Estudiante : Ariel Quizaya Callisaya
 
 ## Practicas
-- Servicio SOAP --> 28/02/2024
-- Servicio REST --> 28/02/2024
+- Servicio SOAP --> 28/02/2024 [x]
+- Servicio REST --> 28/02/2024 []
