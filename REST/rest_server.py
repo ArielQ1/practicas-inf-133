@@ -51,10 +51,23 @@ class RESTRequestHandler(BaseHTTPRequestHandler):
             self.wfile.write(json.dumps(estudiantes).encode('utf-8'))
         elif self.path == '/buscar_nombre':
             self.send_response(200)
-            self.send_header('Content-tyoe', 'application/json')
+            self.send_header('Content-type', 'application/json')
             self.end_headers()
             nombres_estu = [estudiante['nombre'] for estudiante in estudiantes if estudiante['nombre'].startswith('P')]
-            self.wfile.write(json.dumps({"nombres que inician con P": nombres_estu}).encode('utf-8'))
+            self.wfile.write(json.dumps({"nombres de estudiantes que inician con P": nombres_estu}).encode('utf-8'))
+        elif self.path == '/contar_carreras':
+            self.send_response(200)
+            self.send_header('Content-type', 'application/json')
+            self.end_headers()            
+            carreras_mencion = [carrera['carrera-mencion'] for carrera in estudiantes]
+            carreras_almacendas = {}
+            for carrera in carreras_mencion:
+                if carrera in carreras_almacendas:
+                    carreras_almacendas[carrera] += 1         
+                else:
+                    carreras_almacendas[carrera] = 1   
+            print(carreras_almacendas)
+            self.wfile.write(json.dumps({"Estudiantes por carrera-mencion": carreras_almacendas}).encode('utf-8'))
         else:
             self.send_response(404)
             self.send_header('Content-type', 'application/json')
