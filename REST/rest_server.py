@@ -66,8 +66,12 @@ class RESTRequestHandler(BaseHTTPRequestHandler):
                     carreras_almacendas[carrera] += 1         
                 else:
                     carreras_almacendas[carrera] = 1   
-            print(carreras_almacendas)
             self.wfile.write(json.dumps({"Estudiantes por carrera-mencion": carreras_almacendas}).encode('utf-8'))
+        elif self.path == '/total_estudiantes':
+            self.send_response(200)
+            self.send_header('Content-type', 'application/json')
+            self.end_headers()        
+            self.wfile.write(json.dumps({'El total de Estudiantes es':len(estudiantes)}).encode('utf-8'))
         else:
             self.send_response(404)
             self.send_header('Content-type', 'application/json')
