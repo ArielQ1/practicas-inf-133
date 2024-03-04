@@ -42,6 +42,17 @@ class RESTRequestHandler(BaseHTTPRequestHandler):
                 self.send_header("Content-type", "application/json")
                 self.end_headers()
                 self.wfile.write(json.dumps(carreras).encode("utf-8"))
+        elif self.path.startswith("/economia/"):
+            economia = []
+            for carrera in estudiantes:
+                if carrera['carrera'] == 'Economia':
+                    economia.append(carrera)
+            if economia:
+                self.send_response(200)
+                self.send_header("Content-type", "application/json")
+                self.end_headers()
+                self.wfile.write(json.dumps(economia).encode("utf-8"))       
+            
         else:
             self.send_response(404)
             self.send_header("Content-type", "application/json")
@@ -59,6 +70,7 @@ class RESTRequestHandler(BaseHTTPRequestHandler):
             self.send_header("Content-type", "application/json")
             self.end_headers()
             self.wfile.write(json.dumps(estudiantes).encode("utf-8"))
+        
 
         else:
             self.send_response(404)
