@@ -12,7 +12,7 @@ estudiantes = [
         "id": 2,
         "nombre": "Ariel",
         "apellido": "Quizaya",
-        "carrera": "Economia",
+        "carrera": "Comercio Internacional",
     }
 ]
 
