@@ -105,6 +105,16 @@ class GraphQLRequestHandler(BaseHTTPRequestHandler):
         self.send_header("Content-type", "application/json")
         self.end_headers()
         self.wfile.write(json.dumps(data).encode("utf-8"))
+    
+    def do_GET(self):
+        if self.path == "/graphql":            
+            content_length = int(self.headers["Content-Length"])
+            data = self.rfile.read(content_length)
+            data = json.loads(data.decode("utf-8"))
+            result = schema.execute(data["query"])
+            self.response_handler(200, result.data)
+        else:
+            self.response_handler(404, {"Error": "Ruta no existente"})    
         
     def do_POST(self):
         if self.path == "/graphql":

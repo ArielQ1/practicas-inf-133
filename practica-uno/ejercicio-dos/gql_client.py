@@ -37,7 +37,7 @@ query_plantas = '''
     }
 '''
 #Consulta Listar Pantas
-response = requests.post(url, json={'query': query_plantas})
+response = requests.get(url, json={'query': query_plantas})
 print(response.text)
 
 #Definir la consulta buscar plantas por especie
@@ -51,7 +51,7 @@ query_especies = '''
     }
 '''
 #Consulta especies
-response = requests.post(url, json={'query': query_especies})
+response = requests.get(url, json={'query': query_especies})
 print(response.text)
 
 #Definir la consulta para las plantas con frutos
@@ -65,7 +65,7 @@ query_frutos = '''
     }
 '''
 #Consulta Frutos
-response = requests.post(url, json={'query':query_frutos})
+response = requests.get(url, json={'query':query_frutos})
 print(response.text)
 
 #Actualizar la Informacion de una Planta
